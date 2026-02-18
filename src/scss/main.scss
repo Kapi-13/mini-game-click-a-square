@@ -1,0 +1,14 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+.container {
+    height: 100vh;
+    border: 1px solid red;
+    background-color: aqua;
+    .intro-screen,
+    .game-screen {
+        border: 1px solid red;
+        height: 100vh;
+    }
+}
