@@ -5,12 +5,45 @@
 
 .container {
   height: 100vh;
-  border: 1px solid red;
-  background-color: aqua;
+  border: 1px solid green;
+}
+.container.in-game .game-screen {
+  display: flex;
+}
+.container.in-game .intro-screen {
+  display: none;
+  border: 1px solid blue;
 }
 .container .intro-screen,
 .container .game-screen {
   border: 1px solid red;
   height: 100vh;
+}
+.container .game-screen {
+  display: none;
+}
+.container .intro-screen {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.container .intro-screen .start-game-btn {
+  background-color: #0095ff;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  box-shadow: rgba(255, 255, 255, 0.4) 0 1px 0 0 inset;
+  color: #fff;
+  cursor: pointer;
+  font-family: -apple-system, system-ui, "Segoe UI", "Liberation Sans", sans-serif;
+  padding: 8px 0.8em;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.container .intro-screen .start-game-btn:hover {
+  background-color: #07c;
+}
+.container .intro-screen .start-game-btn:active {
+  background-color: #0064bd;
+  box-shadow: none;
 }
 /*# sourceMappingURL=main.css.map */

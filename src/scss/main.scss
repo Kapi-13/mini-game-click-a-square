@@ -4,11 +4,47 @@
 }
 .container {
     height: 100vh;
-    border: 1px solid red;
-    background-color: aqua;
+    border: 1px solid green;
+    &.in-game {
+        .game-screen {
+            display: flex;
+        }
+        .intro-screen {
+            display: none;
+            border: 1px solid blue;
+        }
+    }
     .intro-screen,
     .game-screen {
         border: 1px solid red;
         height: 100vh;
+    }
+    .game-screen {
+        display: none;
+    }
+    .intro-screen {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        .start-game-btn {
+            background-color: #0095ff;
+            border: 1px solid transparent;
+            border-radius: 3px;
+            box-shadow: rgba(255, 255, 255, 0.4) 0 1px 0 0 inset;
+            color: #fff;
+            cursor: pointer;
+            font-family:
+                -apple-system, system-ui, "Segoe UI", "Liberation Sans",
+                sans-serif;
+            padding: 8px 0.8em;
+            width: fit-content;
+        }
+        .start-game-btn:hover {
+            background-color: #07c;
+        }
+        .start-game-btn:active {
+            background-color: #0064bd;
+            box-shadow: none;
+        }
     }
 }
