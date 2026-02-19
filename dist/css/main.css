@@ -1,6 +1,7 @@
 * {
   box-sizing: border-box;
   margin: 0;
+  font-family: -apple-system, system-ui, "Segoe UI", "Liberation Sans", sans-serif;
 }
 
 .container {
@@ -12,15 +13,10 @@
 }
 .container.in-game .intro-screen {
   display: none;
-  border: 1px solid blue;
 }
 .container .intro-screen,
 .container .game-screen {
-  border: 1px solid red;
   height: 100vh;
-}
-.container .game-screen {
-  display: none;
 }
 .container .intro-screen {
   display: flex;
@@ -34,7 +30,6 @@
   box-shadow: rgba(255, 255, 255, 0.4) 0 1px 0 0 inset;
   color: #fff;
   cursor: pointer;
-  font-family: -apple-system, system-ui, "Segoe UI", "Liberation Sans", sans-serif;
   padding: 8px 0.8em;
   width: -moz-fit-content;
   width: fit-content;
@@ -49,5 +44,25 @@
 }
 .container .intro-screen p {
   margin-top: 5px;
+}
+.container .game-screen {
+  display: none;
+}
+.container .game-screen .square {
+  display: flex;
+  height: 200px;
+  width: 200px;
+  background-color: #0095ff;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  cursor: pointer;
+  border-radius: 2px;
+}
+.container .game-screen .square:hover {
+  background-color: rgb(28, 135, 211);
+}
+.container .game-screen .square:active {
+  background-color: #07c;
 }
 /*# sourceMappingURL=main.css.map */

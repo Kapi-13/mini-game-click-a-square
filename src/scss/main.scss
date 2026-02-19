@@ -1,8 +1,11 @@
 * {
     box-sizing: border-box;
     margin: 0;
+    font-family:
+        -apple-system, system-ui, "Segoe UI", "Liberation Sans", sans-serif;
 }
 
+$square-size: 200px;
 $intro-screen-margin: 5px;
 
 .container {
@@ -14,16 +17,12 @@ $intro-screen-margin: 5px;
         }
         .intro-screen {
             display: none;
-            border: 1px solid blue;
         }
     }
     .intro-screen,
     .game-screen {
-        border: 1px solid red;
+        // border: 1px solid red;
         height: 100vh;
-    }
-    .game-screen {
-        display: none;
     }
     .intro-screen {
         display: flex;
@@ -36,22 +35,40 @@ $intro-screen-margin: 5px;
             box-shadow: rgba(255, 255, 255, 0.4) 0 1px 0 0 inset;
             color: #fff;
             cursor: pointer;
-            font-family:
-                -apple-system, system-ui, "Segoe UI", "Liberation Sans",
-                sans-serif;
             padding: 8px 0.8em;
             width: fit-content;
             margin-top: calc($intro-screen-margin * 4);
+            &:hover {
+                background-color: #07c;
+            }
+            &:active {
+                background-color: #0064bd;
+                box-shadow: none;
+            }
         }
-        .start-game-btn:hover {
-            background-color: #07c;
-        }
-        .start-game-btn:active {
-            background-color: #0064bd;
-            box-shadow: none;
-        }
+
         p {
             margin-top: $intro-screen-margin;
+        }
+    }
+    .game-screen {
+        display: none;
+        .square {
+            display: flex;
+            height: $square-size;
+            width: $square-size;
+            background-color: #0095ff;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            cursor: pointer;
+            border-radius: 2px;
+            &:hover {
+                background-color: rgb(28, 135, 211);
+            }
+            &:active {
+                background-color: #07c;
+            }
         }
     }
 }
