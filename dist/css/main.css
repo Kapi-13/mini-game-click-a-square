@@ -7,6 +7,10 @@
 .container {
   height: 100vh;
   border: 1px solid green;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ebebeb;
 }
 .container.in-game .game-screen {
   display: flex;
@@ -16,9 +20,11 @@
 }
 .container .intro-screen,
 .container .game-screen {
-  height: 100vh;
+  background-color: #f5f5f5;
 }
 .container .intro-screen {
+  height: 100vh;
+  width: 100vw;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -46,9 +52,14 @@
   margin-top: 5px;
 }
 .container .game-screen {
+  border-radius: 2px;
   display: none;
+  position: relative;
+  height: 650px;
+  width: 800px;
 }
-.container .game-screen .square {
+.container .game-screen .game-wrapper .square {
+  position: absolute;
   display: flex;
   height: 200px;
   width: 200px;
@@ -59,10 +70,18 @@
   cursor: pointer;
   border-radius: 2px;
 }
-.container .game-screen .square:hover {
+.container .game-screen .game-wrapper .square:hover {
   background-color: rgb(28, 135, 211);
 }
-.container .game-screen .square:active {
+.container .game-screen .game-wrapper .square:active {
   background-color: #07c;
+}
+.container .game-screen .points .points {
+  text-align: center;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: calc(50% - 100px);
+  width: 200px;
 }
 /*# sourceMappingURL=main.css.map */
