@@ -38,6 +38,7 @@
   padding: 8px 0.8em;
   width: -moz-fit-content;
   width: fit-content;
+  margin-top: 20px;
 }
 .container .intro-screen .start-game-btn:hover {
   background-color: #07c;
@@ -45,5 +46,8 @@
 .container .intro-screen .start-game-btn:active {
   background-color: #0064bd;
   box-shadow: none;
+}
+.container .intro-screen p {
+  margin-top: 5px;
 }
 /*# sourceMappingURL=main.css.map */

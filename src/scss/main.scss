@@ -2,6 +2,9 @@
     box-sizing: border-box;
     margin: 0;
 }
+
+$intro-screen-margin: 5px;
+
 .container {
     height: 100vh;
     border: 1px solid green;
@@ -38,6 +41,7 @@
                 sans-serif;
             padding: 8px 0.8em;
             width: fit-content;
+            margin-top: calc($intro-screen-margin * 4);
         }
         .start-game-btn:hover {
             background-color: #07c;
@@ -45,6 +49,9 @@
         .start-game-btn:active {
             background-color: #0064bd;
             box-shadow: none;
+        }
+        p {
+            margin-top: $intro-screen-margin;
         }
     }
 }
