@@ -37,6 +37,10 @@ const paths = {
         src: ["./src/img/**/*"],
         dest: "./dist/img/",
     },
+    audio: {
+        src: ["./src/audio/**/*"],
+        dest: "./dist/audio/",
+    },
     styles: {
         src: ["./src/scss/**/*.scss"],
         dest: "./dist/css/",
@@ -52,71 +56,59 @@ const paths = {
 };
 
 function clear() {
-    return src(paths.all.dest, {
-        read: false,
-    }).pipe(clean());
+    return src(paths.all.dest, { read: false }).pipe(clean());
 }
 
 function clearHtml() {
-    return src(".dist/*", {
-        read: false,
-    }).pipe(clean());
+    return src("./dist/*.html", { read: false }).pipe(clean());
 }
 
 function clearConfig() {
-    return src(paths.config.dest, {
-        read: false,
-    }).pipe(clean());
+    return src(paths.config.dest, { read: false }).pipe(clean());
 }
 
 function clearPHP() {
-    return src(".dist/*", {
-        read: false,
-    }).pipe(clean());
+    return src("./dist/*.php", { read: false }).pipe(clean());
 }
 
 function clearFonts() {
-    return src(paths.fonts.dest, {
-        read: false,
-    }).pipe(clean());
+    return src(paths.fonts.dest, { read: false }).pipe(clean());
 }
 
 function clearCss() {
-    return src(paths.styles.dest, {
-        read: false,
-    }).pipe(clean());
+    return src(paths.styles.dest, { read: false }).pipe(clean());
 }
 
 function clearImg() {
-    return src(paths.images.dest, {
-        read: false,
-    }).pipe(clean());
+    return src(paths.images.dest, { read: false }).pipe(clean());
 }
 
 function clearScripts() {
-    return src(paths.scripts.dest, {
-        read: false,
-    }).pipe(clean());
+    return src(paths.scripts.dest, { read: false }).pipe(clean());
+}
+
+function clearAudio() {
+    return src(paths.audio.dest, { read: false }).pipe(clean());
 }
 
 function copyHtml() {
-    return src(paths.html.src)
-        .pipe(dest(paths.html.dest));
+    return src(paths.html.src).pipe(dest(paths.html.dest));
 }
 
 function copyPHP() {
-    return src(paths.php.src)
-        .pipe(dest(paths.php.dest));
+    return src(paths.php.src).pipe(dest(paths.php.dest));
 }
 
 function copyFonts() {
-    return src(paths.fonts.src)
-        .pipe(dest(paths.fonts.dest));
+    return src(paths.fonts.src).pipe(dest(paths.fonts.dest));
 }
 
 function copyConfig() {
-    return src(paths.config.src) 
-        .pipe(dest(paths.config.dest));
+    return src(paths.config.src).pipe(dest(paths.config.dest));
+}
+
+function copyAudio() {
+    return src(paths.audio.src).pipe(dest(paths.audio.dest));
 }
 
 function optimizeImages() {
@@ -126,24 +118,27 @@ function optimizeImages() {
 }
 
 function compileStyles() {
-    return src(paths.styles.src)
-        .pipe(sourcemaps.init())
-        .pipe(sass().on("error", sass.logError))
-        // .pipe(postcss([autoprefixer(), cssnano()]))
-        .pipe(postcss([autoprefixer()])) // tymczasowo
-        // .pipe(rename({ suffix: ".min" }))
-        .pipe(sourcemaps.write("."))
-        .pipe(dest(paths.styles.dest));
+    return (
+        src(paths.styles.src)
+            .pipe(sourcemaps.init())
+            .pipe(sass().on("error", sass.logError))
+            .pipe(postcss([autoprefixer()]))
+            // .pipe(postcss([autoprefixer(), cssnano()]))  // produkcja
+            .pipe(sourcemaps.write("."))
+            .pipe(dest(paths.styles.dest))
+    );
 }
 
 function minifyScripts() {
-    return src(paths.scripts.src)
-        .pipe(sourcemaps.init())
-        // .pipe(concat("main.js"))
-        // .pipe(terser().on("error", (error) => console.log(error)))
-        // .pipe(rename({ suffix: ".min" }))
-        .pipe(sourcemaps.write("."))
-        .pipe(dest(paths.scripts.dest));
+    return (
+        src(paths.scripts.src)
+            .pipe(sourcemaps.init())
+            // .pipe(concat("main.js"))
+            // .pipe(terser().on("error", (error) => console.log(error)))
+            // .pipe(rename({ suffix: ".min" }))
+            .pipe(sourcemaps.write("."))
+            .pipe(dest(paths.scripts.dest))
+    );
 }
 
 function cacheBust() {
@@ -170,38 +165,46 @@ function browserSyncReload(cb) {
 function watcher() {
     watch(
         paths.html.src,
-        series(clearHtml, copyHtml, cacheBust, browserSyncReload)
+        series(clearHtml, copyHtml, cacheBust, browserSyncReload),
     );
-    watch(
-        paths.config.src,
-        series(clearConfig, copyConfig, browserSyncReload)
-    );
+
+    watch(paths.config.src, series(clearConfig, copyConfig, browserSyncReload));
+
     watch(
         paths.php.src,
-        series(clearPHP, copyPHP, cacheBust, browserSyncReload)
+        series(clearPHP, copyPHP, cacheBust, browserSyncReload),
     );
+
     watch(
         paths.fonts.src,
-        series(clearFonts, copyFonts, cacheBust, browserSyncReload)
+        series(clearFonts, copyFonts, cacheBust, browserSyncReload),
     );
+
     watch(
-        paths.images.src, 
-        series(clearImg, optimizeImages)
-        );
+        paths.images.src,
+        series(clearImg, optimizeImages, browserSyncReload),
+    );
+
+    watch(paths.audio.src, series(clearAudio, copyAudio, browserSyncReload));
+
     watch(
         paths.styles.src,
-        series(clearCss, compileStyles, cacheBust, browserSyncReload)
+        series(clearCss, compileStyles, cacheBust, browserSyncReload),
     );
+
     watch(
         paths.scripts.src,
-        series(clearScripts, minifyScripts, cacheBust, browserSyncReload)
+        series(clearScripts, minifyScripts, cacheBust, browserSyncReload),
     );
 }
+
+/* EXPORTY */
 
 exports.copyHtml = copyHtml;
 exports.copyPHP = copyPHP;
 exports.copyFonts = copyFonts;
 exports.copyConfig = copyConfig;
+exports.copyAudio = copyAudio;
 exports.optimizeImages = optimizeImages;
 exports.compileStyles = compileStyles;
 exports.minifyScripts = minifyScripts;
@@ -209,17 +212,22 @@ exports.cacheBust = cacheBust;
 exports.watcher = watcher;
 exports.browserSync = browserSync;
 exports.clear = clear;
-exports.clearCss = clearCss;
-exports.clearImg = clearImg;
-exports.clearScripts = clearScripts;
-exports.clearHtml = clearHtml;
-exports.clearPHP = clearPHP;
-exports.clearFonts = clearFonts;
+
+/* DEFAULT */
 
 exports.default = series(
     clear,
-    parallel(copyHtml, copyPHP, copyFonts, copyConfig, optimizeImages, compileStyles, minifyScripts),
+    parallel(
+        copyHtml,
+        copyPHP,
+        copyFonts,
+        copyConfig,
+        copyAudio,
+        optimizeImages,
+        compileStyles,
+        minifyScripts,
+    ),
     cacheBust,
     browserSync,
-    watcher
+    watcher,
 );

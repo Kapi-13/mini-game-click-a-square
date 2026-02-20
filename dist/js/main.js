@@ -4,7 +4,7 @@ const square = document.querySelector(".square");
 const points = document.querySelector(".points");
 const time = document.querySelector(".time");
 const endGameScreen = document.querySelector(".end-game-screen");
-
+const audio = new Audio("../audio/HeadEmpty.mp3");
 let pointsNumber = 0;
 let oneClick = 0;
 let timeNumber = 30;
@@ -13,6 +13,8 @@ points.innerText = "0";
 time.innerText = "30";
 
 startGameBtn.addEventListener("click", () => {
+    audio.volume = 0.6;
+    audio.play();
     container.classList.add("in-game");
     square.addEventListener("click", () => {
         if (oneClick === 0) {
@@ -34,6 +36,7 @@ startGameBtn.addEventListener("click", () => {
         if (timeNumber === 0) {
             clearInterval(timeInterval);
             clearInterval(randomPositionInterval);
+            audio.pause();
         }
     }, 1000);
 });
