@@ -59,11 +59,15 @@ $intro-screen-margin: 5px;
     .game-screen {
         border-radius: 2px;
         display: none;
-        position: relative;
-        height: 650px;
+        flex-direction: column;
+        height: 700px;
         width: 800px;
         .game-wrapper {
+            position: relative;
+            height: 600px;
+            width: 100%;
             .square {
+                user-select: none;
                 position: absolute;
                 display: flex;
                 height: $square-size;
@@ -82,13 +86,21 @@ $intro-screen-margin: 5px;
                 }
             }
         }
-        .points .points {
-            text-align: center;
-            overflow: hidden;
-            position: absolute;
-            top: 0;
-            left: calc(50% - 100px);
-            width: 200px;
+        .points-wrapper {
+            height: 100px;
+            width: 100%;
+            background-color: #d8d8d8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .points {
+                user-select: none;
+                text-align: center;
+                overflow: hidden;
+                top: 0;
+                left: calc(50% - 100px);
+                width: 75px;
+            }
         }
     }
 }
