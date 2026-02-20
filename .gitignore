@@ -2,5 +2,3 @@ node_modules/
 .vscode/
 .DS_Store
 .env
-dist/
-gulpfile.js
