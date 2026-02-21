@@ -14,12 +14,12 @@ const endGameSound = new Audio("./audio/EndGame.wav");
 // Zmienne sterujące stanem gry
 let pointsNumber = 0; // aktualna liczba punktów gracza
 let oneClickFlag = 0; // blokada wielokrotnego kliknięcia w jednym cyklu
-let timeNumber = 1; // czas gry w sekundach
+let timeNumber = 30; // czas gry w sekundach
 let oneClick = false;
 
 // Ustawienie początkowych wartości na ekranie
 points.innerText = "0";
-time.innerText = "1";
+time.innerText = "30";
 
 // Obsługa kliknięcia przycisku startu gry
 startGameBtn.addEventListener("click", () => {
