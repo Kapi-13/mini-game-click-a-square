@@ -6,19 +6,20 @@ const points = document.querySelector(".points");
 const time = document.querySelector(".time");
 const endGameScreen = document.querySelector(".end-game-screen");
 
-// Utworzenie obiektów audio (muzyka tła i dźwięk kliknięcia)
+// Utworzenie obiektów audio (muzyka tła, dźwięk kliknięcia i koniec gry)
 const audio = new Audio("./audio/HeadEmpty.mp3");
-const clickwave = new Audio("./audio/point.wav");
+const clickwave = new Audio("./audio/Point.wav");
+const endGameSound = new Audio("./audio/EndGame.wav");
 
 // Zmienne sterujące stanem gry
 let pointsNumber = 0; // aktualna liczba punktów gracza
 let oneClickFlag = 0; // blokada wielokrotnego kliknięcia w jednym cyklu
-let timeNumber = 30; // czas gry w sekundach
+let timeNumber = 1; // czas gry w sekundach
 let oneClick = false;
 
 // Ustawienie początkowych wartości na ekranie
 points.innerText = "0";
-time.innerText = "30";
+time.innerText = "1";
 
 // Obsługa kliknięcia przycisku startu gry
 startGameBtn.addEventListener("click", () => {
@@ -77,9 +78,13 @@ startGameBtn.addEventListener("click", () => {
 
         // Zakończenie gry po upływie czasu
         if (timeNumber === 0) {
+            container.classList.remove("in-game");
+            container.classList.add("end-game");
             clearInterval(timeInterval);
             clearInterval(randomPosition);
             audio.pause();
+            endGameSound.play();
+            endGameScreen;
         }
     }, 1000);
 });

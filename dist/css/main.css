@@ -11,12 +11,25 @@
   justify-content: center;
   align-items: center;
   background-color: #ebebeb;
+  position: relative;
 }
 .container.in-game .game-screen {
   display: flex;
 }
 .container.in-game .intro-screen {
   display: none;
+}
+.container.end-game {
+  filter: blur(2px);
+}
+.container.end-game .game-screen {
+  display: flex;
+}
+.container.end-game .intro-screen {
+  display: none;
+}
+.container.end-game .end-game-screen-wrapper {
+  display: flex;
 }
 .container .intro-screen,
 .container .game-screen {
@@ -101,5 +114,23 @@
   top: 0;
   left: calc(50% - 100px);
   width: 75px;
+}
+
+.container.end-game ~ .end-game-screen-wrapper {
+  display: flex;
+}
+
+.end-game-screen-wrapper {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.end-game-screen-wrapper .end-game-screen {
+  text-align: center;
 }
 /*# sourceMappingURL=main.css.map */
