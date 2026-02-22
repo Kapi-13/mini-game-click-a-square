@@ -8,7 +8,7 @@ const endGameScreen = document.querySelector(".end-game-screen");
 
 // Utworzenie obiektów audio (muzyka tła, dźwięk kliknięcia i koniec gry)
 const audio = new Audio("./audio/HeadEmpty.mp3");
-const clickwave = new Audio("./audio/Point.wav");
+const clickwave = new Audio("./audio/Click.wav");
 const endGameSound = new Audio("./audio/EndGame.wav");
 
 // Zmienne sterujące stanem gry
