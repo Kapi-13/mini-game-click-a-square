@@ -5,6 +5,7 @@ const square = document.querySelector(".square");
 const points = document.querySelector(".points");
 const time = document.querySelector(".time");
 const endGameScreen = document.querySelector(".end-game-screen");
+const totalScore = document.querySelector(".total-score");
 
 // Utworzenie obiektów audio (muzyka tła, dźwięk kliknięcia i koniec gry)
 const audio = new Audio("./audio/HeadEmpty.mp3");
@@ -14,12 +15,12 @@ const endGameSound = new Audio("./audio/EndGame.wav");
 // Zmienne sterujące stanem gry
 let pointsNumber = 0; // aktualna liczba punktów gracza
 let oneClickFlag = 0; // blokada wielokrotnego kliknięcia w jednym cyklu
-let timeNumber = 30; // czas gry w sekundach
+let timeNumber = 5; // czas gry w sekundach
 let oneClick = false;
 
 // Ustawienie początkowych wartości na ekranie
 points.innerText = "0";
-time.innerText = "30";
+time.innerText = "5";
 
 // Obsługa kliknięcia przycisku startu gry
 startGameBtn.addEventListener("click", () => {
@@ -84,7 +85,8 @@ startGameBtn.addEventListener("click", () => {
             clearInterval(randomPosition);
             audio.pause();
             endGameSound.play();
-            endGameScreen;
+            totalScore.innerText =
+                "Zdobyłeś " + pointsNumber + " punktów w " + "30 sekund";
         }
     }, 1000);
 });
