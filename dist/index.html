@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Mini game</title>
-        <link rel="stylesheet" href="./css/main.css?cache_bust=1771859618280" />
+        <link rel="stylesheet" href="./css/main.css?cache_bust=1771872851588" />
     </head>
     <body>
         <div class="container">
@@ -15,7 +15,16 @@
                 </p>
                 <p>Masz 30 sekund a co chwile kwadrat zmienia swoją pozycję.</p>
                 <p>Co każdą zmianę możesz kliknąć tylko raz.</p>
-                <p>Czy zdobędziesz przynajmniej 10 punktów?</p>
+                <p>Czy zdobędziesz przynajmniej 40 punktów?</p>
+                <div class="mode-inputs-wrapper">
+                    <p>Czas:</p>
+                    <div class="time-mode-inputs">
+                        <label for="30s">30s</label>
+                        <input type="radio" name="time" id="30s" />
+                        <label for="60s">60s</label>
+                        <input type="radio" name="time" id="60s" />
+                    </div>
+                </div>
                 <button class="start-game-btn btn">Zacznij grę!</button>
             </div>
             <div class="game-screen">
@@ -37,5 +46,5 @@
             </div>
         </div>
     </body>
-    <script src="./js/main.js?cache_bust=1771859618280"></script>
+    <script src="./js/main.js?cache_bust=1771872851588"></script>
 </html>
