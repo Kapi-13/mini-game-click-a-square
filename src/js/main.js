@@ -6,56 +6,39 @@ const points = document.querySelector(".points");
 const time = document.querySelector(".time");
 const endGameScreen = document.querySelector(".end-game-screen");
 const totalScore = document.querySelector(".total-score");
+const restartGameBtn = document.querySelector(".restart-game-btn");
 
 // Utworzenie obiektów audio (muzyka tła, dźwięk kliknięcia i koniec gry)
-const audio = new Audio("./audio/HeadEmpty.mp3");
-const clickwave = new Audio("./audio/Click.wav");
+const backgroundMusic = new Audio("./audio/HeadEmpty.mp3");
+const clickSound = new Audio("./audio/Click.wav");
 const endGameSound = new Audio("./audio/EndGame.wav");
 
 // Zmienne sterujące stanem gry
 let pointsNumber = 0; // aktualna liczba punktów gracza
-let oneClickFlag = 0; // blokada wielokrotnego kliknięcia w jednym cyklu
-let timeNumber = 5; // czas gry w sekundach
-let oneClick = false;
+let canClickFlag = true; // blokada wielokrotnego kliknięcia w jednym cyklu
+let allTime = 30; // czas gry w sekundach
+let canClick = false;
+const GAME_WIDTH = 600;
+const GAME_HEIGHT = 400;
+const SQUARE_MOVE_INTERVAL = 800;
 
-// Ustawienie początkowych wartości na ekranie
-points.innerText = "0";
-time.innerText = "5";
+const stopAudio = (audioName) => {
+    audioName.pause();
+    audioName.currentTime = 0;
+};
 
 // Obsługa kliknięcia przycisku startu gry
 startGameBtn.addEventListener("click", () => {
+    // Ustawienie początkowych wartości na ekranie
+    points.innerText = pointsNumber;
+    time.innerText = allTime;
+
     // Konfiguracja i uruchomienie muzyki tła
-    audio.volume = 0.2;
-    audio.play();
+    backgroundMusic.volume = 0.2;
+    backgroundMusic.play();
 
     // Przełączenie widoku na ekran gry
     container.classList.add("in-game");
-
-    // Obsługa kliknięcia w kwadrat
-    square.addEventListener("click", () => {
-        // Obsługa wyłączania blokady wielokrotnego kliknięcia
-        if (oneClick === true) {
-            // Punkt można zdobyć tylko raz zanim kwadrat zmieni pozycję
-            if (oneClickFlag === 0) {
-                // Odtworzenie efektu dźwiękowego
-                clickwave.play();
-
-                // Zwiększenie liczby punktów i aktualizacja widoku
-                pointsNumber++;
-                points.innerText = pointsNumber;
-
-                // Zablokowanie kolejnych kliknięć do czasu zmiany pozycji
-                oneClickFlag++;
-            }
-        } else {
-            // Odtworzenie efektu dźwiękowego
-            clickwave.play();
-
-            // Zwiększenie liczby punktów i aktualizacja widoku
-            pointsNumber++;
-            points.innerText = pointsNumber;
-        }
-    });
 
     // Interwał odpowiedzialny za losowe przemieszczanie kwadratu
     const randomPosition = setInterval(() => {
@@ -68,8 +51,10 @@ startGameBtn.addEventListener("click", () => {
         square.style.top = topDistance;
 
         // Odblokowanie możliwości zdobycia punktu w nowej pozycji
-        oneClickFlag = 0;
+        canClickFlag = 0;
     }, 800);
+
+    let timeNumber = allTime; // pozostały czas gry
 
     // Interwał odliczający czas gry
     const timeInterval = setInterval(() => {
@@ -83,10 +68,46 @@ startGameBtn.addEventListener("click", () => {
             container.classList.add("end-game");
             clearInterval(timeInterval);
             clearInterval(randomPosition);
-            audio.pause();
+            stopAudio(backgroundMusic);
             endGameSound.play();
             totalScore.innerText =
-                "Zdobyłeś " + pointsNumber + " punktów w " + "30 sekund";
+                "Zdobyłeś " +
+                pointsNumber +
+                " punktów w " +
+                allTime +
+                " sekund";
+            pointsNumber = 0;
         }
     }, 1000);
+});
+
+// Obsługa kliknięcia w kwadrat
+square.addEventListener("click", () => {
+    stopAudio(clickSound);
+    // Obsługa wyłączania blokady wielokrotnego kliknięcia
+    if (canClick) {
+        // Punkt można zdobyć tylko raz zanim kwadrat zmieni pozycję
+        if (canClickFlag) {
+            // Odtworzenie efektu dźwiękowego
+            clickSound.play();
+
+            // Zwiększenie liczby punktów i aktualizacja widoku
+            pointsNumber++;
+            points.innerText = pointsNumber;
+
+            // Zablokowanie kolejnych kliknięć do czasu zmiany pozycji
+            canClickFlag = false;
+        }
+    } else {
+        // Odtworzenie efektu dźwiękowego
+        clickSound.play();
+
+        // Zwiększenie liczby punktów i aktualizacja widoku
+        pointsNumber++;
+        points.innerText = pointsNumber;
+    }
+});
+
+restartGameBtn.addEventListener("click", () => {
+    container.classList.remove("end-game");
 });
