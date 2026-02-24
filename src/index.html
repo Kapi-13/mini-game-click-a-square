@@ -16,15 +16,24 @@
                 <p>Masz 30 sekund a co chwile kwadrat zmienia swoją pozycję.</p>
                 <p>Co każdą zmianę możesz kliknąć tylko raz.</p>
                 <p>Czy zdobędziesz przynajmniej 40 punktów?</p>
-                <div class="mode-inputs-wrapper">
-                    <p>Czas:</p>
+                <form class="mode-inputs-wrapper" autocomplete="off">
                     <div class="time-mode-inputs">
-                        <label for="30s">30s</label>
-                        <input type="radio" name="time" id="30s" />
-                        <label for="60s">60s</label>
-                        <input type="radio" name="time" id="60s" />
+                        <p>Czas:</p>
+                        <div class="option-wrapper">
+                            <label for="30s">30s</label>
+                            <input type="radio" name="time" id="30s" checked />
+                        </div>
+                        <div class="option-wrapper">
+                            <label for="60s">60s</label>
+                            <input type="radio" name="time" id="60s" />
+                        </div>
+                        <div class="option-wrapper">
+                            <label for="infinity">Nieskończony</label>
+                            <input type="radio" name="time" id="infinity" />
+                        </div>
                     </div>
-                </div>
+                </form>
+
                 <button class="start-game-btn btn">Zacznij grę!</button>
             </div>
             <div class="game-screen">

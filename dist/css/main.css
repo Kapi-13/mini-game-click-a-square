@@ -6,7 +6,6 @@
 
 .container {
   height: 100vh;
-  border: 1px solid green;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -45,16 +44,12 @@
 .container .intro-screen > p {
   margin-top: 5px;
 }
-.container .intro-screen .mode-inputs-wrapper {
+.container form.mode-inputs-wrapper {
   margin-top: 25px;
-  display: flex;
-  gap: 10px;
 }
-.container .intro-screen .mode-inputs-wrapper .time-mode-inputs {
+.container form.mode-inputs-wrapper .time-mode-inputs {
   display: flex;
-}
-.container .intro-screen .mode-inputs-wrapper .time-mode-inputs input {
-  margin-right: 10px;
+  gap: 15px;
 }
 .container .game-screen {
   border-radius: 2px;
@@ -136,7 +131,7 @@
   padding: 8px 0.8em;
   width: -moz-fit-content;
   width: fit-content;
-  margin-top: 15px;
+  margin-top: 10px;
 }
 .btn:hover {
   background-color: #07c;

@@ -10,7 +10,6 @@ $intro-screen-margin: 5px;
 
 .container {
     height: 100vh;
-    border: 1px solid green;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -50,16 +49,12 @@ $intro-screen-margin: 5px;
         & > p {
             margin-top: $intro-screen-margin;
         }
-        .mode-inputs-wrapper {
-            margin-top: calc($intro-screen-margin * 5);
+    }
+    form.mode-inputs-wrapper {
+        margin-top: calc($intro-screen-margin * 5);
+        .time-mode-inputs {
             display: flex;
-            gap: calc($intro-screen-margin * 2);
-            .time-mode-inputs {
-                display: flex;
-                input {
-                    margin-right: calc($intro-screen-margin * 2);
-                }
-            }
+            gap: calc($intro-screen-margin * 3);
         }
     }
     .game-screen {
@@ -135,7 +130,7 @@ $intro-screen-margin: 5px;
     cursor: pointer;
     padding: 8px 0.8em;
     width: fit-content;
-    margin-top: calc($intro-screen-margin * 3);
+    margin-top: calc($intro-screen-margin * 2);
     &:hover {
         background-color: #07c;
     }
