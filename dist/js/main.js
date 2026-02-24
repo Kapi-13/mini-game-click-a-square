@@ -17,29 +17,28 @@ const endGameSound = new Audio("./audio/EndGame.wav");
 // Zmienne sterujące stanem gry
 let pointsNumber = 0; // aktualna liczba punktów gracza
 let canClickFlag = true; // blokada wielokrotnego kliknięcia w jednym cyklu
-let allTime = 30; // czas gry w sekundach
+let allTime; // czas gry w sekundach
 let canClick = false;
 let checkedElem; // zaznaczony input
 const GAME_WIDTH = 600;
 const GAME_HEIGHT = 400;
 const SQUARE_MOVE_INTERVAL = 800;
 
-const stopAudio = (audioName) => {
+const stopAudio = audioName => {
     audioName.pause();
     audioName.currentTime = 0;
 };
 
 // Obsługa kliknięcia przycisku startu gry
 startGameBtn.addEventListener("click", () => {
-    timeInputs.forEach((element) => {
-        // element.addEventListener("click", () => {
-        element.checked ? (checkedElem = element.id) : [];
-        console.log(checkedElem);
-        // });
+    timeInputs.forEach(element => {
+        element.checked ? (allTime = element.id) : [];
+        console.log(allTime);
     });
     // Ustawienie początkowych wartości na ekranie
     points.innerText = pointsNumber;
     time.innerText = allTime;
+    backgroundMusic.loop = true;
 
     // Konfiguracja i uruchomienie muzyki tła
     backgroundMusic.volume = 0.2;
@@ -65,30 +64,34 @@ startGameBtn.addEventListener("click", () => {
     }, SQUARE_MOVE_INTERVAL);
 
     let timeNumber = allTime; // pozostały czas gry
+    console.log(timeNumber, allTime, time);
+    if (allTime === "infinity") {
+        time.innerText = "Nieskończony czas";
+    } else {
+        // Interwał odliczający czas gry
+        const timeInterval = setInterval(() => {
+            // Zmniejszenie czasu o 1 sekundę
+            timeNumber--;
+            time.innerText = timeNumber;
 
-    // Interwał odliczający czas gry
-    const timeInterval = setInterval(() => {
-        // Zmniejszenie czasu o 1 sekundę
-        timeNumber--;
-        time.innerText = timeNumber;
-
-        // Zakończenie gry po upływie czasu
-        if (timeNumber === 0) {
-            container.classList.remove("in-game");
-            container.classList.add("end-game");
-            clearInterval(timeInterval);
-            clearInterval(randomPosition);
-            stopAudio(backgroundMusic);
-            endGameSound.play();
-            totalScore.innerText =
-                "Zdobyłeś " +
-                pointsNumber +
-                " punktów w " +
-                allTime +
-                " sekund";
-            pointsNumber = 0;
-        }
-    }, 1000);
+            // Zakończenie gry po upływie czasu
+            if (timeNumber === 0) {
+                container.classList.remove("in-game");
+                container.classList.add("end-game");
+                clearInterval(timeInterval);
+                clearInterval(randomPosition);
+                stopAudio(backgroundMusic);
+                endGameSound.play();
+                totalScore.innerText =
+                    "Zdobyłeś " +
+                    pointsNumber +
+                    " punktów w " +
+                    allTime +
+                    " sekund";
+                pointsNumber = 0;
+            }
+        }, 1000);
+    }
 });
 
 // Obsługa kliknięcia w kwadrat
