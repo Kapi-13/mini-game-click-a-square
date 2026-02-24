@@ -7,6 +7,7 @@ const time = document.querySelector(".time");
 const endGameScreen = document.querySelector(".end-game-screen");
 const totalScore = document.querySelector(".total-score");
 const restartGameBtn = document.querySelector(".restart-game-btn");
+const timeInputs = document.querySelectorAll(".time-mode-inputs input");
 
 // Utworzenie obiektów audio (muzyka tła, dźwięk kliknięcia i koniec gry)
 const backgroundMusic = new Audio("./audio/HeadEmpty.mp3");
@@ -18,6 +19,7 @@ let pointsNumber = 0; // aktualna liczba punktów gracza
 let canClickFlag = true; // blokada wielokrotnego kliknięcia w jednym cyklu
 let allTime = 30; // czas gry w sekundach
 let canClick = false;
+let checkedElem; // zaznaczony input
 const GAME_WIDTH = 600;
 const GAME_HEIGHT = 400;
 const SQUARE_MOVE_INTERVAL = 800;
@@ -29,6 +31,12 @@ const stopAudio = (audioName) => {
 
 // Obsługa kliknięcia przycisku startu gry
 startGameBtn.addEventListener("click", () => {
+    timeInputs.forEach((element) => {
+        // element.addEventListener("click", () => {
+        element.checked ? (checkedElem = element.id) : [];
+        console.log(checkedElem);
+        // });
+    });
     // Ustawienie początkowych wartości na ekranie
     points.innerText = pointsNumber;
     time.innerText = allTime;
@@ -43,16 +51,18 @@ startGameBtn.addEventListener("click", () => {
     // Interwał odpowiedzialny za losowe przemieszczanie kwadratu
     const randomPosition = setInterval(() => {
         // Losowa pozycja pozioma (oś X)
-        let leftDistance = Math.floor(Math.random() * (600 - 0 + 1)) + 0 + "px";
+        let leftDistance =
+            Math.floor(Math.random() * (GAME_WIDTH - 0 + 1)) + 0 + "px";
         square.style.left = leftDistance;
 
         // Losowa pozycja pionowa (oś Y)
-        let topDistance = Math.floor(Math.random() * (400 - 0 + 1)) + 0 + "px";
+        let topDistance =
+            Math.floor(Math.random() * (GAME_HEIGHT - 0 + 1)) + 0 + "px";
         square.style.top = topDistance;
 
         // Odblokowanie możliwości zdobycia punktu w nowej pozycji
         canClickFlag = 0;
-    }, 800);
+    }, SQUARE_MOVE_INTERVAL);
 
     let timeNumber = allTime; // pozostały czas gry
 
