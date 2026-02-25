@@ -10,19 +10,16 @@
     <body>
         <div class="container">
             <div class="intro-screen">
-                <p>
-                    Klikaj w kwadrat tak szybko, jak potrafisz i zdobywaj
-                    punkty!
-                </p>
+                <p>Klikaj w kwadrat tak szybko, jak potrafisz i zdobywaj punkty!</p>
                 <p>Masz 30 sekund a co chwile kwadrat zmienia swoją pozycję.</p>
                 <p>Co każdą zmianę możesz kliknąć tylko raz.</p>
                 <p>Czy zdobędziesz przynajmniej 40 punktów?</p>
                 <form class="mode-inputs-wrapper" autocomplete="off">
-                    <div class="time-mode-inputs">
+                    <div class="time-mode-inputs inputs">
                         <p>Czas:</p>
                         <div class="option-wrapper">
                             <label for="30">30s</label>
-                            <input type="radio" name="time" id="5" checked />
+                            <input type="radio" name="time" id="30" checked />
                         </div>
                         <div class="option-wrapper">
                             <label for="60">60s</label>
@@ -31,6 +28,17 @@
                         <div class="option-wrapper">
                             <label for="infinity">Nieskończony</label>
                             <input type="radio" name="time" id="infinity" />
+                        </div>
+                    </div>
+                    <div class="faster-mode-inputs inputs">
+                        <p>Przyśpieszenie:</p>
+                        <div class="option-wrapper">
+                            <label for="false">Brak</label>
+                            <input type="radio" name="faster" id="false" checked />
+                        </div>
+                        <div class="option-wrapper">
+                            <label for="true">Coraz szybciej</label>
+                            <input type="radio" name="faster" id="true" />
                         </div>
                     </div>
                 </form>

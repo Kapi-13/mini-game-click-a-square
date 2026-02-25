@@ -1,8 +1,7 @@
 * {
     box-sizing: border-box;
     margin: 0;
-    font-family:
-        -apple-system, system-ui, "Segoe UI", "Liberation Sans", sans-serif;
+    font-family: -apple-system, system-ui, 'Segoe UI', 'Liberation Sans', sans-serif;
 }
 
 $square-size: 200px;
@@ -58,9 +57,16 @@ $intro-screen-margin: 5px;
     }
     form.mode-inputs-wrapper {
         margin-top: calc($intro-screen-margin * 5);
-        .time-mode-inputs {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        .inputs {
             display: flex;
+            width: 70%;
+            justify-content: center;
             gap: calc($intro-screen-margin * 3);
+            margin-top: calc($intro-screen-margin * 1);
         }
     }
     .game-screen {

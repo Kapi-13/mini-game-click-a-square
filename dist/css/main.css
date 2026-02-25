@@ -51,10 +51,17 @@
 }
 .container form.mode-inputs-wrapper {
   margin-top: 25px;
-}
-.container form.mode-inputs-wrapper .time-mode-inputs {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.container form.mode-inputs-wrapper .inputs {
+  display: flex;
+  width: 70%;
+  justify-content: center;
   gap: 15px;
+  margin-top: 5px;
 }
 .container .game-screen {
   border-radius: 2px;
