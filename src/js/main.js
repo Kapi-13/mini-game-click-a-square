@@ -8,7 +8,7 @@ const endGameScreen = document.querySelector('.end-game-screen');
 const totalScore = document.querySelector('.total-score');
 const restartGameBtn = document.querySelector('.restart-game-btn');
 const timeInputs = document.querySelectorAll('.time-mode-inputs input');
-const fasterModeInputs = document.querySelectorAll('.faster-mode-inputs input');
+const squareMoveInputs = document.querySelectorAll('.square-move-inputs input');
 const endInfinityGameBtn = document.querySelector('.end-game-btn');
 
 // Utworzenie obiektów audio (muzyka tła, dźwięk kliknięcia i koniec gry)
@@ -23,7 +23,7 @@ let faster; // przyśpieszenie gry
 let checkedElem; // zaznaczony input
 const GAME_WIDTH = 600;
 const GAME_HEIGHT = 400;
-let SQUARE_MOVE_INTERVAL = 800;
+let SQUARE_MOVE_INTERVAL;
 let timeInterval;
 let randomPosition;
 endInfinityGameBtn.style.display = 'none';
@@ -42,8 +42,8 @@ const endGame = () => {
     stopAudio(backgroundMusic);
     endGameSound.play();
     allTime === 'infinity'
-        ? (totalScore.innerText = 'Zdobyłeś ' + pointsNumber + ' punktów w ' + 'nieskończonym czasie')
-        : (totalScore.innerText = 'Zdobyłeś ' + pointsNumber + ' punktów w ' + allTime + ' sekund');
+        ? (totalScore.innerText = `Zdobyłeś ${pointsNumber} punktów w nieskończonym czasie i zmianie pozycji co ${SQUARE_MOVE_INTERVAL} ms`)
+        : (totalScore.innerText = `Zdobyłeś ${pointsNumber} punktów w ${allTime} sekund i zmianie pozycji co ${SQUARE_MOVE_INTERVAL} ms`);
     pointsNumber = 0;
 };
 
@@ -53,9 +53,9 @@ startGameBtn.addEventListener('click', () => {
         element.checked ? (allTime = element.id) : [];
         console.log(allTime);
     });
-    fasterModeInputs.forEach((element) => {
-        element.checked ? (faster = element.id) : [];
-        console.log(faster);
+    squareMoveInputs.forEach((element) => {
+        element.checked ? (SQUARE_MOVE_INTERVAL = element.id) : [];
+        console.log(SQUARE_MOVE_INTERVAL);
     });
     // Ustawienie początkowych wartości na ekranie
     points.innerText = pointsNumber;
@@ -72,6 +72,7 @@ startGameBtn.addEventListener('click', () => {
     // Interwał odpowiedzialny za losowe przemieszczanie kwadratu
     const setRandomPosition = () => {
         randomPosition = setInterval(() => {
+            SQUARE_MOVE_INTERVAL = 200;
             // Losowa pozycja pozioma (oś X)
             let leftDistance = Math.floor(Math.random() * (GAME_WIDTH - 0 + 1)) + 0 + 'px';
             square.style.left = leftDistance;
@@ -79,11 +80,9 @@ startGameBtn.addEventListener('click', () => {
             // Losowa pozycja pionowa (oś Y)
             let topDistance = Math.floor(Math.random() * (GAME_HEIGHT - 0 + 1)) + 0 + 'px';
             square.style.top = topDistance;
-
-            // Odblokowanie możliwości zdobycia punktu w nowej pozycji
-            canClickFlag = 0;
         }, SQUARE_MOVE_INTERVAL);
     };
+
     setRandomPosition();
     let timeNumber = allTime; // pozostały czas gry
     if (allTime === 'infinity') {
@@ -102,14 +101,6 @@ startGameBtn.addEventListener('click', () => {
             }
         }, 1000);
     }
-
-    setTimeout(() => {
-        clearInterval(randomPosition);
-        setTimeout(() => {
-            SQUARE_MOVE_INTERVAL = 200;
-            setRandomPosition();
-        }, 2000);
-    }, 3000);
 });
 
 // Obsługa kliknięcia w kwadrat

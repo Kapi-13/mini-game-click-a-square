@@ -63,7 +63,7 @@ $intro-screen-margin: 5px;
         width: 100%;
         .inputs {
             display: flex;
-            width: 70%;
+            // width: 100%;
             justify-content: center;
             gap: calc($intro-screen-margin * 3);
             margin-top: calc($intro-screen-margin * 1);

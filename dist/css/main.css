@@ -58,7 +58,6 @@
 }
 .container form.mode-inputs-wrapper .inputs {
   display: flex;
-  width: 70%;
   justify-content: center;
   gap: 15px;
   margin-top: 5px;

@@ -1,11 +1,11 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pl">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Mini game</title>
         <link rel="shortcut icon" href="#" type="image/x-icon" />
-        <link rel="stylesheet" href="./css/main.css?cache_bust=1772046339188" />
+        <link rel="stylesheet" href="./css/main.css?cache_bust=1772098694301" />
     </head>
     <body>
         <div class="container">
@@ -18,6 +18,10 @@
                     <div class="time-mode-inputs inputs">
                         <p>Czas:</p>
                         <div class="option-wrapper">
+                            <label for="15">15s</label>
+                            <input type="radio" name="time" id="15" />
+                        </div>
+                        <div class="option-wrapper">
                             <label for="30">30s</label>
                             <input type="radio" name="time" id="30" checked />
                         </div>
@@ -26,19 +30,35 @@
                             <input type="radio" name="time" id="60" />
                         </div>
                         <div class="option-wrapper">
+                            <label for="120">120s</label>
+                            <input type="radio" name="time" id="120" />
+                        </div>
+                        <div class="option-wrapper">
                             <label for="infinity">Nieskończony</label>
                             <input type="radio" name="time" id="infinity" />
                         </div>
                     </div>
-                    <div class="faster-mode-inputs inputs">
-                        <p>Przyśpieszenie:</p>
+                    <div class="square-move-inputs inputs">
+                        <p>Przerwa między kolejnym zmienieniem pozycji:</p>
                         <div class="option-wrapper">
-                            <label for="false">Brak</label>
-                            <input type="radio" name="faster" id="false" checked />
+                            <label for="false">1000ms</label>
+                            <input type="radio" name="square-move" id="1000" />
                         </div>
                         <div class="option-wrapper">
-                            <label for="true">Coraz szybciej</label>
-                            <input type="radio" name="faster" id="true" />
+                            <label for="false">800ms</label>
+                            <input type="radio" name="square-move" id="800" checked />
+                        </div>
+                        <div class="option-wrapper">
+                            <label for="true">600ms</label>
+                            <input type="radio" name="square-move" id="600" />
+                        </div>
+                        <div class="option-wrapper">
+                            <label for="true">400ms</label>
+                            <input type="radio" name="square-move" id="400" />
+                        </div>
+                        <div class="option-wrapper">
+                            <label for="true">200ms</label>
+                            <input type="radio" name="square-move" id="200" />
                         </div>
                     </div>
                 </form>
@@ -65,5 +85,5 @@
             </div>
         </div>
     </body>
-    <script src="./js/main.js?cache_bust=1772046339188"></script>
+    <script src="./js/main.js?cache_bust=1772098694301"></script>
 </html>
